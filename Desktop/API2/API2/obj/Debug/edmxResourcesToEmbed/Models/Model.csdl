@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StaffManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="StaffManagementEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Staffs" EntityType="StaffManagementModel.Staff" />
+    <EntitySet Name="StaffInTasks" EntityType="StaffManagementModel.StaffInTask" />
+    <EntitySet Name="Tasks" EntityType="StaffManagementModel.Task" />
+    <AssociationSet Name="FK__StaffInTa__Staff__286302EC" Association="StaffManagementModel.FK__StaffInTa__Staff__286302EC">
+      <End Role="Staff" EntitySet="Staffs" />
+      <End Role="StaffInTask" EntitySet="StaffInTasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StaffInTa__TaskI__29572725" Association="StaffManagementModel.FK__StaffInTa__TaskI__29572725">
+      <End Role="Task" EntitySet="Tasks" />
+      <End Role="StaffInTask" EntitySet="StaffInTasks" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ShortName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="StaffInTasks" Relationship="StaffManagementModel.FK__StaffInTa__Staff__286302EC" FromRole="Staff" ToRole="StaffInTask" />
+  </EntityType>
+  <EntityType Name="StaffInTask">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="StaffId" Type="Int32" Nullable="false" />
+    <Property Name="TaskId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Staff" Relationship="StaffManagementModel.FK__StaffInTa__Staff__286302EC" FromRole="StaffInTask" ToRole="Staff" />
+    <NavigationProperty Name="Task" Relationship="StaffManagementModel.FK__StaffInTa__TaskI__29572725" FromRole="StaffInTask" ToRole="Task" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ParentId" Type="Int32" />
+    <Property Name="Label" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Type" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+    <Property Name="Duration" Type="Int32" />
+    <Property Name="Progress" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="IsUnscheduled" Type="Boolean" />
+    <NavigationProperty Name="StaffInTasks" Relationship="StaffManagementModel.FK__StaffInTa__TaskI__29572725" FromRole="Task" ToRole="StaffInTask" />
+  </EntityType>
+  <Association Name="FK__StaffInTa__Staff__286302EC">
+    <End Type="StaffManagementModel.Staff" Role="Staff" Multiplicity="1" />
+    <End Type="StaffManagementModel.StaffInTask" Role="StaffInTask" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaffInTask">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StaffInTa__TaskI__29572725">
+    <End Type="StaffManagementModel.Task" Role="Task" Multiplicity="1" />
+    <End Type="StaffManagementModel.StaffInTask" Role="StaffInTask" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaffInTask">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

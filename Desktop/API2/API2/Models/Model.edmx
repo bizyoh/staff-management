@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="StaffManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="250" />
+          <Property Name="ShortName" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="StaffInTask">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="StaffId" Type="int" Nullable="false" />
+          <Property Name="TaskId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="Label" Type="nchar" MaxLength="100" />
+          <Property Name="Type" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="Progress" Type="nchar" MaxLength="10" />
+          <Property Name="IsUnscheduled" Type="bit" />
+        </EntityType>
+        <Association Name="FK__StaffInTa__Staff__286302EC">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="StaffInTask" Type="Self.StaffInTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StaffInTask">
+              <PropertyRef Name="StaffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StaffInTa__TaskI__29572725">
+          <End Role="Task" Type="Self.Task" Multiplicity="1" />
+          <End Role="StaffInTask" Type="Self.StaffInTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StaffInTask">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StaffManagementModelStoreContainer">
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StaffInTask" EntityType="Self.StaffInTask" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__StaffInTa__Staff__286302EC" Association="Self.FK__StaffInTa__Staff__286302EC">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="StaffInTask" EntitySet="StaffInTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StaffInTa__TaskI__29572725" Association="Self.FK__StaffInTa__TaskI__29572725">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="StaffInTask" EntitySet="StaffInTask" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StaffManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="StaffManagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Staffs" EntityType="StaffManagementModel.Staff" />
+          <EntitySet Name="StaffInTasks" EntityType="StaffManagementModel.StaffInTask" />
+          <EntitySet Name="Tasks" EntityType="StaffManagementModel.Task" />
+          <AssociationSet Name="FK__StaffInTa__Staff__286302EC" Association="StaffManagementModel.FK__StaffInTa__Staff__286302EC">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="StaffInTask" EntitySet="StaffInTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StaffInTa__TaskI__29572725" Association="StaffManagementModel.FK__StaffInTa__TaskI__29572725">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="StaffInTask" EntitySet="StaffInTasks" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="StaffInTasks" Relationship="StaffManagementModel.FK__StaffInTa__Staff__286302EC" FromRole="Staff" ToRole="StaffInTask" />
+        </EntityType>
+        <EntityType Name="StaffInTask">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="StaffId" Type="Int32" Nullable="false" />
+          <Property Name="TaskId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Staff" Relationship="StaffManagementModel.FK__StaffInTa__Staff__286302EC" FromRole="StaffInTask" ToRole="Staff" />
+          <NavigationProperty Name="Task" Relationship="StaffManagementModel.FK__StaffInTa__TaskI__29572725" FromRole="StaffInTask" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="Label" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="Progress" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IsUnscheduled" Type="Boolean" />
+          <NavigationProperty Name="StaffInTasks" Relationship="StaffManagementModel.FK__StaffInTa__TaskI__29572725" FromRole="Task" ToRole="StaffInTask" />
+        </EntityType>
+        <Association Name="FK__StaffInTa__Staff__286302EC">
+          <End Type="StaffManagementModel.Staff" Role="Staff" Multiplicity="1" />
+          <End Type="StaffManagementModel.StaffInTask" Role="StaffInTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StaffInTask">
+              <PropertyRef Name="StaffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StaffInTa__TaskI__29572725">
+          <End Type="StaffManagementModel.Task" Role="Task" Multiplicity="1" />
+          <End Type="StaffManagementModel.StaffInTask" Role="StaffInTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StaffInTask">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StaffManagementModelStoreContainer" CdmEntityContainer="StaffManagementEntities">
+          <EntitySetMapping Name="Staffs">
+            <EntityTypeMapping TypeName="StaffManagementModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StaffInTasks">
+            <EntityTypeMapping TypeName="StaffManagementModel.StaffInTask">
+              <MappingFragment StoreEntitySet="StaffInTask">
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="StaffManagementModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="IsUnscheduled" ColumnName="IsUnscheduled" />
+                <ScalarProperty Name="Progress" ColumnName="Progress" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
