@@ -1,0 +1,22 @@
+
+.ng-filter{
+    padding: 10px;
+    background: #efefef !important;
+}
+.ng-filter>*{
+    z-index:1000;
+    background: #efefef !important;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option{
+    background: #efefef !important;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+    background-color: red;
+}
+a{
+    text-decoration: none;
+    color:black
+}
+a:hover{
+    color :bisque;
+}

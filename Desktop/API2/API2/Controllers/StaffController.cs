@@ -67,12 +67,12 @@ namespace API2.Controllers
             {
                 return BadRequest();
             }
-           
-            if (!_staffService.DeleteStaff(id))
+           var rs = _staffService.DeleteStaff(id);
+            if (!rs)
             {
                 return BadRequest();
             }
-            else return Ok();
+            else return Ok(rs);
 
         }
         [HttpPut]

@@ -1,0 +1,17 @@
+
+<ion-row>
+    <ion-accordion-group></ion-accordion-group>
+      <ion-col><ion-label>{{staff.FullName}}</ion-label></ion-col>
+        <ion-col><ion-label>{{staff.ShortName}}</ion-label></ion-col>
+        <ion-col><ion-label>{{staff.ShortName}}</ion-label></ion-col>
+        <input type="hidden" value="{}">
+        <ion-col><ion-button type="button"  (click)="openModalEdit()" color="secondary">Edit</ion-button>
+            <ion-button id="present-alert" type="button"  (click)="presentAlert()" color="secondary">Delete</ion-button>
+            <!-- <ion-alert
+                trigger="present-alert"
+                header="Alert!"
+                [buttons]="alertButtons"
+                (didDismiss)="setResult($event)"
+                ></ion-alert> -->
+        </ion-col>
+</ion-row>

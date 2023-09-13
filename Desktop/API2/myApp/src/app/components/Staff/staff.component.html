@@ -1,0 +1,43 @@
+
+    <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <div class="ng-filter">
+                <ng-select  [(ngModel)]="selectedStaff"   [clearSearchOnAdd]="true" [searchFn]="filterByTerm" (change)="changeToSelectedStaff()">
+                  <ng-option  *ngFor="let opt of staffs" [value]="opt.Id">{{opt.FullName}}</ng-option>
+               </ng-select>
+              </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12">
+              <ion-row class="row header">
+                <ion-col class="col">Full Name</ion-col>
+                <ion-col class="col">Short Name</ion-col>
+                <ion-col class="col">Tasks</ion-col>
+                <ion-col class="col">Action</ion-col>
+              </ion-row>
+              <ion-row >
+                <ion-col size="12" *ngFor="let item of staffs">
+                  <detail-staff-item  [staff]="item"></detail-staff-item>
+                </ion-col>
+            </ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="12" size-sm="3" size-md="6">
+            <ion-header>
+              <ion-toolbar>
+                <ion-title>New staff</ion-title>
+              </ion-toolbar>
+            </ion-header>
+            <form [formGroup]="createStaffForm" (ngSubmit)="onSubmit()">
+              <ion-input label="FULL NAME" label-placement="floating" fill="solid" placeholder="Enter text"
+                formControlName="fullName" id="fullName"></ion-input>
+              <ion-input label="SHORT NAME" label-placement="floating" fill="solid" placeholder="Enter text"
+                formControlName="shortName" id="shortName"></ion-input>
+              <div><ion-button expand="block" type="submit" color="secondary">Add</ion-button></div>
+            </form>
+          </ion-col>
+        </ion-row>
+      </ion-grid>

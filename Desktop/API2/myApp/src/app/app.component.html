@@ -1,0 +1,43 @@
+<div class="main">
+  <ion-grid>
+    <ion-row style="
+    min-height: 50px;">
+      <ion-menu side="end" contentId="main-content">
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>
+                Menu
+            </ion-title>
+          </ion-toolbar>
+        </ion-header>
+        
+        <ion-content class="ion-padding"><ion-list>
+          <ion-row>
+            <ion-col size="12">
+              <ion-item> <a  [routerLink]="['']"  routerLinkActive="active" > Home </a></ion-item>
+            </ion-col>
+            <ion-col size="12">
+              <ion-item>  <a [routerLink]="['/staff']"  routerLinkActive="active" > Staff </a></ion-item>
+            </ion-col>
+            <ion-col size="12">
+              <ion-item><a [routerLink]="['/task']"  routerLinkActive="active" > Task </a></ion-item>
+            </ion-col>
+        </ion-row>
+        </ion-list></ion-content>
+      </ion-menu>
+      <div class="ion-page" id="main-content">
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Menu</ion-title>
+            <ion-buttons slot="end">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+      </div>
+    </ion-row>
+  </ion-grid>
+  <router-outlet></router-outlet>
+ 
+</div>
+<!-- <script src="https://unpkg.com/@ionic/core@5.0.0/dist/ionic.js"></script> -->

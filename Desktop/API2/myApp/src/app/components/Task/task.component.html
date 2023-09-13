@@ -1,0 +1,55 @@
+
+<ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <!-- <div class="ng-filter">
+            <ng-select  [(ngModel)]="selectedTask"   [clearSearchOnAdd]="true" [searchFn]="filterByTerm" (change)="changeToSelectedStaff()">
+              <ng-option  *ngFor="let opt of tasks" [value]="opt.Id">{{opt.FullName}}</ng-option>
+           </ng-select>
+          </div> -->
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col size="12">
+          <ion-row class="row header">
+            <ion-col class="col">Name</ion-col>
+            <ion-col class="col">Label</ion-col>
+            <ion-col class="col">Parent ID</ion-col>
+            <ion-col class="col">Start Date</ion-col>
+            <ion-col class="col">End Date</ion-col>
+            <ion-col class="col">Duration</ion-col>
+            <ion-col class="col">Progress</ion-col>
+            <ion-col class="col">IsUnscheduled</ion-col>
+          </ion-row>
+          <ion-row >
+            <ion-col size="12" *ngFor="let item of tasks">
+              <detail-staff-item  [tasks]="item"></detail-staff-item>
+            </ion-col>
+        </ion-row>
+        </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-sm="3" size-md="6">
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>New staff</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <form [formGroup]="createTaskForm" (ngSubmit)="onSubmit()">
+          <ion-input label="ParentID" label-placement="floating" fill="solid" placeholder="Enter text"
+            formControlName="parentID" id="parentID"></ion-input>
+          <ion-input label="Name" label-placement="floating" fill="solid" placeholder="Enter text"
+            formControlName="name" id="name"></ion-input>
+          <ion-input label="Label" label-placement="floating" fill="solid" placeholder="Enter text"
+          formControlName="label" id="label"></ion-input>
+          <ion-datetime  formControlName="startDate" id="startDate">Start date</ion-datetime>
+          <ion-datetime  formControlName="endDate" id="endDate" >End date</ion-datetime>
+          <ion-input label="Duration"  formControlName="name" id="name" label-placement="floating" fill="solid" placeholder="Enter text"></ion-input>
+        <ion-input label="Progress" label-placement="floating" fill="solid" placeholder="Enter text"
+        formControlName="progress" id="progress"></ion-input>
+        <ion-checkbox   formControlName="isUnscheduled" id="isUnscheduled">is Unscheduled</ion-checkbox>
+      <div><ion-button expand="block" type="submit" color="secondary">Add</ion-button></div>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
