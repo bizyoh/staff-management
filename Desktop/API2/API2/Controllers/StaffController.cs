@@ -13,7 +13,7 @@ using System.Web.Http;
 
 namespace API2.Controllers
 {
-    public class StaffController : ApiController
+    public class StaffController : BaseController
     {
         private readonly IStaffService _staffService;
         public StaffController()
@@ -35,9 +35,10 @@ namespace API2.Controllers
         {
             CreateStaffDtoValidation staffValidation = new CreateStaffDtoValidation();
             ValidationResult result = staffValidation.Validate(createStaffDto);
-            if (_staffService.CreateStaff(createStaffDto) > 0)
+            int rs = _staffService.CreateStaff(createStaffDto);
+            if (rs>0)
             {
-                return Ok(result);
+                return Ok(rs);
             }
             else return BadRequest();
 

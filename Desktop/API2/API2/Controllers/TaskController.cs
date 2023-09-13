@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace API2.Controllers
 {
-    public class TaskController : ApiController
+    public class TaskController : BaseController
     {
         private readonly ITaskService _taskService;
         public TaskController()

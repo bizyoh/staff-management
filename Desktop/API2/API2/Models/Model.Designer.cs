@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\bizyoh\Desktop\API2\API2\Models\Model.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\phucgt.VSTNEW\source\repos\staff-management\Desktop\API2\API2\Models\Model.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

@@ -18,6 +18,7 @@ namespace API2.Models
         public Staff()
         {
             this.StaffInTasks = new HashSet<StaffInTask>();
+            this.StaffInTasks1 = new HashSet<StaffInTask>();
         }
     
         public int Id { get; set; }
@@ -26,5 +27,7 @@ namespace API2.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StaffInTask> StaffInTasks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StaffInTask> StaffInTasks1 { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace API2.Models
         public int TaskId { get; set; }
     
         public virtual Staff Staff { get; set; }
+        public virtual Staff Staff1 { get; set; }
         public virtual Task Task { get; set; }
     }
 }
