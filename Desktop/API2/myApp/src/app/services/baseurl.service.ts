@@ -35,8 +35,8 @@ export class BASE_URLService{
     CreateChartTask(){
         return this.url+"chart-task";
     }
-    EditChartTask(id:number){
-        return this.url+"chart-task/"+id;
+    EditChartTask(){
+        return this.url+"chart-task";
     }
    
 }

@@ -7,6 +7,7 @@ import { Task } from 'src/app/entity/Task';
 import { StaffService } from 'src/app/services/staff.service';
 import { TaskService } from 'src/app/services/task.service';
 import { EditModelTaskComponent } from '../Edit-Modal/edit-modal-task.component';
+import { format } from 'date-fns';
 
 @Component({
     selector: 'task-detail',
@@ -15,6 +16,8 @@ import { EditModelTaskComponent } from '../Edit-Modal/edit-modal-task.component'
   })
   export class DetailTaskComponent{
     @Input() task:Task;
+    startDateValue :any;
+    endDateValue :any;
     constructor(
         private readonly taskService : TaskService,
         private formBuilder: FormBuilder,
@@ -23,7 +26,8 @@ import { EditModelTaskComponent } from '../Edit-Modal/edit-modal-task.component'
         private router : Router,
         ){}
     ngOnInit(){
-
+      this.startDateValue = format(new Date(this.task.StartDate),'yyyy-MM-dd');
+      this.endDateValue = format(new Date(this.task.EndDate),'yyyy-MM-dd');
       }
       async presentAlert() {
         const alert = await this.alertController.create({

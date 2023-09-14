@@ -12,8 +12,5 @@ import { Routes, RouterModule } from '@angular/router'
 })
 export class AppComponent {
   title="Bai test";
-  staffs : Staff[];
-  staff: Staff;
-  selectedStaff: number;
-  
+
 }

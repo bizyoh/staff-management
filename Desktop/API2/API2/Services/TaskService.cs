@@ -7,12 +7,13 @@ using System.Text;
 using System.Security.Cryptography.X509Certificates;
 using API2.Models.Dto.Task;
 using System.Web.Http;
+using System.Data.Entity;
 
 namespace API2.Services
 {
     public interface ITaskService
     {
-        List<Task> GetAllTask();
+        List<TaskViewModel> GetAllTask();
         Task GetTask(int id);
         int CreateTask(CreateTaskDto createTaskDto);
         bool EditTask(int id, DetailTaskDto detailTaskDto);
@@ -57,9 +58,10 @@ namespace API2.Services
         {
             try
             {
-                var model = _db.Tasks.FirstOrDefault(x => x.Id == detailTaskDto.id);
+                var model = _db.Tasks.AsNoTracking().FirstOrDefault(x => x.Id == detailTaskDto.id);
                 if (model == null) throw new HttpResponseException(System.Net.HttpStatusCode.NotFound);
                 model = AutoMapper.Mapper.Map<Task>(detailTaskDto);
+                _db.Entry(model).State = EntityState.Modified;
                 return _db.SaveChanges() > 0;
             }
             catch(Exception ex)
@@ -70,15 +72,20 @@ namespace API2.Services
         }
         public int CreateTask(CreateTaskDto createTaskDto)
         {
-            var task = AutoMapper.Mapper.Map<Task>(createTaskDto);
-            _db.Tasks.Add(task);
-            if (_db.SaveChanges() > 0)
+            using ( var trans = _db.Database.BeginTransaction())
             {
-                return task.Id;
-            }
-            else
-            {
-                return 0;
+                var task = AutoMapper.Mapper.Map<Task>(createTaskDto);
+                task.StaffInTasks = createTaskDto.StaffIds.Select(x => new StaffInTask { StaffId = x }).ToList();
+                _db.Tasks.Add(task);
+                if (_db.SaveChanges() > 0)
+                {
+                    trans.Commit();
+                    return task.Id;
+                }
+                else
+                {
+                    return 0;
+                }
             }
         }
         public bool DeleteTask(int Id)
@@ -91,7 +98,7 @@ namespace API2.Services
 
         public bool EditTask(int id, DetailTaskDto detailTaskDto)
         {
-            var task = _db.Tasks.FirstOrDefault(x => x.Id == id);
+            var task = _db.Tasks.Include(x=>x.StaffInTasks).FirstOrDefault(x => x.Id == id);
             if (task == null)
             {
                 return false;
@@ -99,13 +106,42 @@ namespace API2.Services
             else
             {
                 AutoMapper.Mapper.Map(detailTaskDto, task);
+                var staffInTasksToRemove = new List<StaffInTask>();
+
+                foreach (var staffInTask in task.StaffInTasks)
+                {
+                    if (!detailTaskDto.StaffIds.Contains(staffInTask.StaffId))
+                    {
+                        staffInTasksToRemove.Add(staffInTask);
+                   
+                    }
+                }
+
+                foreach (var staffInTaskToRemove in staffInTasksToRemove)
+                {
+                    task.StaffInTasks.Remove(staffInTaskToRemove);
+                    _db.StaffInTasks.Remove(staffInTaskToRemove);
+                }
+                
+                foreach (var staffId in detailTaskDto?.StaffIds)
+                {
+                    var existingStaffInTask = task.StaffInTasks.FirstOrDefault(s => s.StaffId == staffId);
+
+                    if (existingStaffInTask == null)
+                    {
+                        task.StaffInTasks.Add(new StaffInTask { StaffId = staffId });
+
+                    }
+                }
             }
             return _db.SaveChanges() > 0;
         }
 
-        public List<Task> GetAllTask()
+        public List<TaskViewModel> GetAllTask()
         {
-             return  _db.Tasks.ToList();
+             var model =   _db.Tasks.Include(x=>x.StaffInTasks).ToList();
+            var rs = AutoMapper.Mapper.Map<List<TaskViewModel>>(model);
+            return rs;
         }
 
         public Task GetTask(int id)

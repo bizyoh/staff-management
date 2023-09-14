@@ -212,6 +212,7 @@
     <Compile Include="Models\Dto\Task\DetailTaskDto.cs" />
     <Compile Include="Models\Dto\Task\CreateTaskDto.cs" />
     <Compile Include="Models\Dto\Task\TaskChartDto.cs" />
+    <Compile Include="Models\Dto\Task\TaskViewModel.cs" />
     <Compile Include="Models\Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

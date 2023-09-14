@@ -18,6 +18,8 @@ import { DetailTaskComponent } from './components/Task/DetailTask/detail-task.co
 import { TaskService } from './services/task.service';
 import { EditModelTaskComponent } from './components/Task/Edit-Modal/edit-modal-task.component';
 import { DatePipe } from '@angular/common';
+import { CreateModelTaskComponent } from './components/Task/Create-Modal/create-modal-task.component';
+import { GanttTaskComponent } from './components/Task/ganttTask/ganttTask.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { DatePipe } from '@angular/common';
     TaskComponent,
     DetailStaffComponent,
     DetailTaskComponent,
-    EditModelTaskComponent
+    EditModelTaskComponent,
+    CreateModelTaskComponent,
+    GanttTaskComponent
   ],
   imports: [
     BrowserModule,

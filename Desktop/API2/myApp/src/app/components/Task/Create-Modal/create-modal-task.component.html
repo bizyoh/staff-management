@@ -1,17 +1,15 @@
-<div class="dl-block-auto">
-<ion-header>
+<div class="dl-block-auto"><ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
             <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
         </ion-buttons>
-        <ion-title> Edit {{task.Name}} Information</ion-title>
+        <ion-title> Create  Information</ion-title>
         <ion-buttons slot="end">
             <ion-button (click)="confirm()">Confirm</ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-
-<form [formGroup]="editTaskForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="createTaskForm" (ngSubmit)="onSubmit()">
     <ion-input label="Name" label-placement="floating" fill="solid" placeholder="Enter text"
       formControlName="name"></ion-input>
     <ion-input label="Label" label-placement="floating" fill="solid" placeholder="Enter text"
@@ -34,10 +32,8 @@
   <ion-input label="Progress"  label-placement="floating" fill="solid" placeholder="Enter text"
   formControlName="progress"></ion-input>
   <ion-item><ion-checkbox   formControlName="isUnscheduled" >is Unscheduled</ion-checkbox></ion-item>
-  <ng-select  [items]="tasks" 
-            [(ngModel)]="parentID" [ngModelOptions]="{standalone: true}" 
-            [clearSearchOnAdd]="true" placeholder="Parent Task" bindLabel="Name"
-            bindValue="Id"  >
+  <ng-select  [(ngModel)]="parentID" [ngModelOptions]="{standalone: true}" [clearSearchOnAdd]="true" placeholder="Parent Task" (change)="changeToSelectedParentTask($event)" >
+    <ng-option  *ngFor="let opt of tasks" [value]="opt.Id">{{opt.Name}}</ng-option>
  </ng-select>
  <ng-select [items]="staffs"
             bindLabel="FullName"
@@ -49,6 +45,6 @@
             [(ngModel)] ="staffsSelected" [ngModelOptions]="{standalone: true}"
            >
  </ng-select>
-<div><ion-button expand="block" type="submit" color="secondary">Update</ion-button></div>
+<div><ion-button expand="block" type="submit" color="secondary">Add</ion-button></div>
 </form>
 </div>

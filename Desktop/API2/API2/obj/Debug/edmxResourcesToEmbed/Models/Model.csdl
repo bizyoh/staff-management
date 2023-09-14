@@ -1,22 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="StaffManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityContainer Name="StaffManagementEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Staffs" EntityType="StaffManagementModel.Staff" />
-    <EntitySet Name="StaffInTasks" EntityType="StaffManagementModel.StaffInTask" />
-    <EntitySet Name="Tasks" EntityType="StaffManagementModel.Task" />
-    <AssociationSet Name="FK__StaffInTa__Staff__03317E3D" Association="StaffManagementModel.FK__StaffInTa__Staff__03317E3D">
-      <End Role="Staff" EntitySet="Staffs" />
-      <End Role="StaffInTask" EntitySet="StaffInTasks" />
-    </AssociationSet>
-    <AssociationSet Name="FK__StaffInTa__Staff__0425A276" Association="StaffManagementModel.FK__StaffInTa__Staff__0425A276">
-      <End Role="Staff" EntitySet="Staffs" />
-      <End Role="StaffInTask" EntitySet="StaffInTasks" />
-    </AssociationSet>
-    <AssociationSet Name="FK__StaffInTa__TaskI__0519C6AF" Association="StaffManagementModel.FK__StaffInTa__TaskI__0519C6AF">
-      <End Role="Task" EntitySet="Tasks" />
-      <End Role="StaffInTask" EntitySet="StaffInTasks" />
-    </AssociationSet>
-  </EntityContainer>
   <EntityType Name="Staff">
     <Key>
       <PropertyRef Name="Id" />
@@ -24,8 +7,8 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="FullName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="ShortName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="StaffInTasks" Relationship="StaffManagementModel.FK__StaffInTa__Staff__03317E3D" FromRole="Staff" ToRole="StaffInTask" />
-    <NavigationProperty Name="StaffInTasks1" Relationship="StaffManagementModel.FK__StaffInTa__Staff__0425A276" FromRole="Staff" ToRole="StaffInTask" />
+    <NavigationProperty Name="StaffInTasks" Relationship="Self.FK__StaffInTa__Staff__3A81B327" FromRole="Staff" ToRole="StaffInTask" />
+    <NavigationProperty Name="StaffInTasks1" Relationship="Self.FK__StaffInTa__Staff__3B75D760" FromRole="Staff" ToRole="StaffInTask" />
   </EntityType>
   <EntityType Name="StaffInTask">
     <Key>
@@ -34,9 +17,9 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="StaffId" Type="Int32" Nullable="false" />
     <Property Name="TaskId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Staff" Relationship="StaffManagementModel.FK__StaffInTa__Staff__03317E3D" FromRole="StaffInTask" ToRole="Staff" />
-    <NavigationProperty Name="Staff1" Relationship="StaffManagementModel.FK__StaffInTa__Staff__0425A276" FromRole="StaffInTask" ToRole="Staff" />
-    <NavigationProperty Name="Task" Relationship="StaffManagementModel.FK__StaffInTa__TaskI__0519C6AF" FromRole="StaffInTask" ToRole="Task" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK__StaffInTa__Staff__3A81B327" FromRole="StaffInTask" ToRole="Staff" />
+    <NavigationProperty Name="Staff1" Relationship="Self.FK__StaffInTa__Staff__3B75D760" FromRole="StaffInTask" ToRole="Staff" />
+    <NavigationProperty Name="Task" Relationship="Self.FK__StaffInTa__TaskI__3C69FB99" FromRole="StaffInTask" ToRole="Task" />
   </EntityType>
   <EntityType Name="Task">
     <Key>
@@ -45,18 +28,18 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ParentId" Type="Int32" />
     <Property Name="Label" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-    <Property Name="Type" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="StartDate" Type="DateTime" Precision="0" />
     <Property Name="EndDate" Type="DateTime" Precision="0" />
     <Property Name="Duration" Type="Int32" />
-    <Property Name="Progress" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="Progress" Type="Decimal" Precision="30" Scale="0" />
     <Property Name="IsUnscheduled" Type="Boolean" />
-    <NavigationProperty Name="StaffInTasks" Relationship="StaffManagementModel.FK__StaffInTa__TaskI__0519C6AF" FromRole="Task" ToRole="StaffInTask" />
+    <NavigationProperty Name="StaffInTasks" Relationship="Self.FK__StaffInTa__TaskI__3C69FB99" FromRole="Task" ToRole="StaffInTask" />
   </EntityType>
-  <Association Name="FK__StaffInTa__Staff__03317E3D">
-    <End Type="StaffManagementModel.Staff" Role="Staff" Multiplicity="1" />
-    <End Type="StaffManagementModel.StaffInTask" Role="StaffInTask" Multiplicity="*" />
+  <Association Name="FK__StaffInTa__Staff__3A81B327">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+    <End Role="StaffInTask" Type="Self.StaffInTask" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Staff">
         <PropertyRef Name="Id" />
@@ -66,9 +49,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__StaffInTa__Staff__0425A276">
-    <End Type="StaffManagementModel.Staff" Role="Staff" Multiplicity="1" />
-    <End Type="StaffManagementModel.StaffInTask" Role="StaffInTask" Multiplicity="*" />
+  <Association Name="FK__StaffInTa__Staff__3B75D760">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+    <End Role="StaffInTask" Type="Self.StaffInTask" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Staff">
         <PropertyRef Name="Id" />
@@ -78,9 +61,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__StaffInTa__TaskI__0519C6AF">
-    <End Type="StaffManagementModel.Task" Role="Task" Multiplicity="1" />
-    <End Type="StaffManagementModel.StaffInTask" Role="StaffInTask" Multiplicity="*" />
+  <Association Name="FK__StaffInTa__TaskI__3C69FB99">
+    <End Role="Task" Type="Self.Task" Multiplicity="1" />
+    <End Role="StaffInTask" Type="Self.StaffInTask" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Task">
         <PropertyRef Name="Id" />
@@ -90,4 +73,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityContainer Name="StaffManagementEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Staffs" EntityType="Self.Staff" />
+    <EntitySet Name="StaffInTasks" EntityType="Self.StaffInTask" />
+    <EntitySet Name="Tasks" EntityType="Self.Task" />
+    <AssociationSet Name="FK__StaffInTa__Staff__3A81B327" Association="Self.FK__StaffInTa__Staff__3A81B327">
+      <End Role="Staff" EntitySet="Staffs" />
+      <End Role="StaffInTask" EntitySet="StaffInTasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StaffInTa__Staff__3B75D760" Association="Self.FK__StaffInTa__Staff__3B75D760">
+      <End Role="Staff" EntitySet="Staffs" />
+      <End Role="StaffInTask" EntitySet="StaffInTasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StaffInTa__TaskI__3C69FB99" Association="Self.FK__StaffInTa__TaskI__3C69FB99">
+      <End Role="Task" EntitySet="Tasks" />
+      <End Role="StaffInTask" EntitySet="StaffInTasks" />
+    </AssociationSet>
+  </EntityContainer>
 </Schema>

@@ -6,6 +6,7 @@ import { Task } from 'src/app/entity/Task';
 import { StaffService } from 'src/app/services/staff.service';
 import { TaskService } from 'src/app/services/task.service';
 import {format, parseISO} from 'date-fns';
+import { CreateModelTaskComponent } from './Create-Modal/create-modal-task.component';
 
 @Component({
     selector: 'task-item',
@@ -14,6 +15,7 @@ import {format, parseISO} from 'date-fns';
   })
   export class TaskComponent{
     tasks : Task[];
+    staffs: Staff[];
     parentID:number;
     showPickerStartDate = false;
     showPickerEndDate = false;
@@ -23,7 +25,9 @@ import {format, parseISO} from 'date-fns';
     endDateValue = format(new Date(),'yyyy-MM-dd');
     constructor(
       private readonly taskService : TaskService,
+     
       private formBuilder: FormBuilder,
+      private modalCtrl: ModalController
       ){
       }
     ngOnInit(){
@@ -31,7 +35,7 @@ import {format, parseISO} from 'date-fns';
           id:0,
           parentId:0,
           label: '',
-          type: 0,
+          type: '',
           name: '',
           startDate:'',
           endDate:'',
@@ -41,6 +45,7 @@ import {format, parseISO} from 'date-fns';
       })
       this.getAllTasks();
     }
+   
     getAllTasks(){
       this.taskService.getAll().then(
         res=>{
@@ -54,29 +59,7 @@ import {format, parseISO} from 'date-fns';
     }
     onSubmit(): void {
       // Process checkout data here
-      console.log(this.parentID)
-      let taskModel : Task ={
-        ParentId: this.parentID,
-        Label: this.createTaskForm.value.label,
-        Name: this.createTaskForm.value.name,
-        Type: parseInt(this.createTaskForm.value.type),
-        StartDate: this.startDateValue,
-        EndDate: this.endDateValue,
-        Duration: parseInt(this.createTaskForm.value.duration),
-        Progress: this.createTaskForm.value.progress,
-        IsUnscheduled: this.createTaskForm.value.isUnscheduled
-      };
-      console.log( taskModel);
-      this.taskService.create(taskModel).then(
-        res=>{
-          let id :number  = res as number;
-          if(id > 0 ){
-            this.getAllTasks();
-          }
-        }
-        
-      )
-      this.createTaskForm.reset();
+   
     }
     changeToSelectedTask(){
       if(this.selectedTask> 0 ){
@@ -94,5 +77,17 @@ import {format, parseISO} from 'date-fns';
       }
       changeToSelectedParentTask(value:any){
         this.parentID = value;
+      }
+      async openModalCreate() {
+        const modal = await this.modalCtrl.create({
+          component: CreateModelTaskComponent
+        });
+        modal.onDidDismiss().then(rs=>{
+            if(rs.role==='confirm' && rs.data){
+                this.tasks.push(rs.data as Task) ;
+            }
+        })
+        modal.present();
+        const { data, role } = await modal.onWillDismiss();
       }
   }

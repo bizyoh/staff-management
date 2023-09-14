@@ -1,15 +1,17 @@
 
+
 <ion-row>
-        <ion-col><ion-label>{{task.Name}}</ion-label></ion-col>
-        <ion-col><ion-label>{{task.Label}}</ion-label></ion-col>
-        <ion-col><ion-label>{{task.ParentId}}</ion-label></ion-col>
-        <ion-col><ion-label>{{task.Type}}</ion-label></ion-col>
-        <ion-col><ion-label>{{task.StartDate}}</ion-label></ion-col>
-        <ion-col><ion-label>{{task.EndDate}}</ion-label></ion-col>
-        <ion-col><ion-label>{{task.Duration}}</ion-label></ion-col>
-        <ion-col><ion-label>{{task.Progress}}</ion-label></ion-col>
-        <ion-col><ion-label>{{task.IsUnscheduled}}</ion-label></ion-col>
-        <ion-col><ion-button type="button"  (click)="openModalEdit()" color="secondary">Edit</ion-button>
-            <ion-button id="present-alert" type="button"  (click)="presentAlert()" color="secondary">Delete</ion-button>
+        <ion-col class="col">{{task.Id}}</ion-col>
+        <ion-col class="col">{{task.Name}}</ion-col>
+        <ion-col class="col">{{task.Label}}</ion-col>
+        <ion-col class="col">{{task.ParentId}}</ion-col>
+        <ion-col class="col">{{task.Type}}</ion-col>
+        <ion-col class="col">{{startDateValue}}</ion-col>
+        <ion-col class="col">{{endDateValue}}</ion-col>
+        <ion-col class="col">{{task.Duration}}</ion-col>
+        <ion-col class="col">{{task.Progress}}</ion-col>
+        <ion-col class="col">{{task.IsUnscheduled}}</ion-col>
+        <ion-col class="col"><ion-button type="button" shape="round" (click)="openModalEdit()" color="warning">Edit</ion-button>
+            <ion-button id="present-alert" type="button" shape="round" (click)="presentAlert()" color="danger">Delete</ion-button>
         </ion-col> 
     </ion-row>

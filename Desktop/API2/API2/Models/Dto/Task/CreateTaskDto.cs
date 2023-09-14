@@ -16,6 +16,7 @@ namespace API2.Models.Dto.Task
         public Nullable<int> Duration { get; set; }
         public decimal Progress { get; set; }
         public Nullable<bool> IsUnscheduled { get; set; }
+        public List<int> StaffIds { get; set; }
 
     }
 }

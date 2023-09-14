@@ -60,7 +60,7 @@ export class GanttComponent implements OnInit {
 
       const dp = gantt.createDataProcessor({
           task: {
-              update: ( id:number,data: TaskChart) => this.taskService.editChart(id,data),
+              update: ( data: TaskChart) => this.taskService.editChart(data),
               create: (data: TaskChart) => this.taskService.createChart(data),
               delete: (id: any) => this.taskService.delete(id),
           },

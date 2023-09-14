@@ -4,13 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d7b748af5b1f478bb8485490cd2bc296" Name="Diagram1">
-        <EntityTypeShape EntityType="StaffManagementModel.Staff" Width="1.5" PointX="0.75" PointY="1" />
-        <EntityTypeShape EntityType="StaffManagementModel.StaffInTask" Width="1.5" PointX="3" PointY="0.875" />
-        <EntityTypeShape EntityType="StaffManagementModel.Task" Width="1.5" PointX="0.75" PointY="5.875" />
-        <AssociationConnector Association="StaffManagementModel.FK__StaffInTa__Staff__03317E3D" />
-        <AssociationConnector Association="StaffManagementModel.FK__StaffInTa__Staff__0425A276" />
-        <AssociationConnector Association="StaffManagementModel.FK__StaffInTa__TaskI__0519C6AF" />
+      <Diagram DiagramId="dbc8cd645abd4f4eb6212f7e28615aa3" Name="Diagram1">
+        <EntityTypeShape EntityType="StaffManagementModel.Staff" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="StaffManagementModel.StaffInTask" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StaffManagementModel.Task" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <AssociationConnector Association="StaffManagementModel.FK__StaffInTa__Staff__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="StaffManagementModel.FK__StaffInTa__Staff__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="StaffManagementModel.FK__StaffInTa__TaskI__3C69FB99" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

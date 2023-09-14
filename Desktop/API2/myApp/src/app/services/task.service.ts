@@ -39,8 +39,8 @@ export class TaskService{
         var value = this.httpClient.post(this.endpoint.CreateChartTask(),task);
         return await lastValueFrom(value);
     }
-    async editChart(id:number,task:TaskChart){
-        var value = this.httpClient.put(this.endpoint.EditChartTask(id),task);
+    async editChart(task:TaskChart){
+        var value = this.httpClient.put(this.endpoint.EditChartTask(),task);
         return await lastValueFrom(value);
     }
 }

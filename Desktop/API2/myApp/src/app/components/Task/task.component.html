@@ -1,7 +1,10 @@
 
+<div class="dl-block-auto">
+<!-- <gantt></gantt> -->
 <ion-grid>
     <ion-row>
-      <ion-col size="12">
+      <ion-col size="2"> <ion-button expand="block" (click)="openModalCreate()" color="secondary">New Task</ion-button></ion-col>
+      <ion-col size="8">
         <div class="ng-filter">
             <ng-select  [(ngModel)]="selectedTask"   [clearSearchOnAdd]="true" [searchFn]="filterByTerm" (change)="changeToSelectedTask()">
               <ng-option  *ngFor="let opt of tasks" [value]="opt.Id">{{opt.Name}}</ng-option>
@@ -16,6 +19,7 @@
             <ion-col class="col">Name</ion-col>
             <ion-col class="col">Label</ion-col>
             <ion-col class="col">Parent ID</ion-col>
+            <ion-col class="col">Type</ion-col>
             <ion-col class="col">Start Date</ion-col>
             <ion-col class="col">End Date</ion-col>
             <ion-col class="col">Duration</ion-col>
@@ -30,44 +34,6 @@
         </ion-row>
         </ion-col>
     </ion-row>
-    <ion-row class="ion-justify-content-center">
-      <ion-col size="12" size-sm="3" size-md="6">
-        <ion-header>
-          <ion-toolbar>
-            <ion-title>New Task</ion-title>
-          </ion-toolbar>
-        </ion-header>
-        <form [formGroup]="createTaskForm" (ngSubmit)="onSubmit()">
-        
-          <!-- <ion-input label="ParentID" label-placement="floating" fill="solid" placeholder="Enter text"
-            formControlName="parentID" id="parentID"></ion-input> -->
-          <ion-input label="Name" label-placement="floating" fill="solid" placeholder="Enter text"
-            formControlName="name" id="name"></ion-input>
-          <ion-input label="Label" label-placement="floating" fill="solid" placeholder="Enter text"
-          formControlName="label" id="label"></ion-input>
-          <ion-input label="Type" type="number" 
-          formControlName="type" id="type"
-          label-placement="floating" fill="solid" placeholder="Enter number">
-        </ion-input>
-          <ion-item (click)="showPickerStartDate = !showPickerStartDate">
-            <ion-label>Start date</ion-label>
-            <ion-text >{{startDateValue}}</ion-text>
-          </ion-item>
-          <ion-datetime #startDatetime *ngIf="showPickerStartDate" [value]="startDateValue" size="cover" (ionChange)="startDateChange(startDatetime.value)"></ion-datetime>
-          <ion-item (click)="showPickerEndDate = !showPickerEndDate">
-            <ion-label>End date</ion-label>
-            <ion-text>{{endDateValue}}</ion-text>
-          </ion-item>
-          <ion-datetime #endDatetime *ngIf="showPickerEndDate" [value]="endDateValue" size="cover" (ionChange)="endDateChange(endDatetime.value)"></ion-datetime>
-          <ion-input label="Duration"  formControlName="duration" id="duration" label-placement="floating" fill="solid" placeholder="Enter number"></ion-input>
-        <ion-input label="Progress"  label-placement="floating" fill="solid" placeholder="Enter text"
-        formControlName="progress" id="progress"></ion-input>
-        <ion-item><ion-checkbox   formControlName="isUnscheduled" id="isUnscheduled">is Unscheduled</ion-checkbox></ion-item>
-        <ng-select  [(ngModel)]="parentID" [ngModelOptions]="{standalone: true}" [clearSearchOnAdd]="true" placeholder="Parent Task" (change)="changeToSelectedParentTask($event)" >
-          <ng-option  *ngFor="let opt of tasks" [value]="opt.Id">{{opt.Name}}</ng-option>
-       </ng-select>
-      <div><ion-button expand="block" type="submit" color="secondary">Add</ion-button></div>
-        </form>
-      </ion-col>
-    </ion-row>
+   
   </ion-grid>
+</div>
