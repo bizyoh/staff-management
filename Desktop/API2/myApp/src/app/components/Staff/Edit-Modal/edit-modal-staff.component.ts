@@ -25,7 +25,7 @@ import { StaffService } from 'src/app/services/staff.service';
       this.modalCtrl.dismiss(null, 'cancel');
     }
     confirm() {
-      this.modalCtrl.dismiss(this.name, 'confirm');
+      this.modalCtrl.dismiss(this.name, 'cancel');
     }
    
    
@@ -48,7 +48,7 @@ import { StaffService } from 'src/app/services/staff.service';
         res=>{
           let rs  = res as boolean;
           if(rs){
-            this.modalCtrl.dismiss(staffModel);
+            this.modalCtrl.dismiss(staffModel,'confirm');
           }
         } )
     }

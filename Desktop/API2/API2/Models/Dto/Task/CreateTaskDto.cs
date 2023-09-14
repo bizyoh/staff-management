@@ -14,7 +14,7 @@ namespace API2.Models.Dto.Task
         public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
         public Nullable<int> Duration { get; set; }
-        public string Progress { get; set; }
+        public decimal Progress { get; set; }
         public Nullable<bool> IsUnscheduled { get; set; }
 
     }

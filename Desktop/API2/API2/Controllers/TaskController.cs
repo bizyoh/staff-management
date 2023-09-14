@@ -57,6 +57,48 @@ namespace API2.Controllers
             }
             return BadRequest();
         }
+        [HttpGet]
+        [Route("api/chart-task")]
+        public IHttpActionResult ChartTask()
+        {
+            var rs = _taskService.GetAllChartTask();
+            return Ok(rs);
+        }
+        [HttpGet]
+        public IHttpActionResult ChartTask(int id)
+        {
+            var rs = _taskService.GetTask(id);
+            if (rs == null)
+            {
+                return NotFound();
+            }
+            return Ok(rs);
+        }
+
+        [HttpPost]
+        [Route("api/chart-task")]
+        public IHttpActionResult ChartTask(CreateTaskChartDto createTaskDto)
+        {
+            var rs = _taskService.CreateChartTask(createTaskDto);
+            if (rs > 0)
+            {
+                return Ok(rs);
+            }
+            return BadRequest();
+        }
+
+        [HttpPut]
+        [Route("api/chart-task")]
+        public IHttpActionResult ChartTask( DetailTaskChartDto detailTaskDto)
+        {
+            var rs = _taskService.EditChartTask( detailTaskDto);
+            if (rs)
+            {
+                return Ok(rs);
+            }
+            return BadRequest();
+        }
+
         [HttpDelete]
         public IHttpActionResult DeleteTask(int id)
         {

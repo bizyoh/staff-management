@@ -15,8 +15,12 @@
 }
 a{
     text-decoration: none;
-    color:black
+    color:black;
+    cursor: pointer;
 }
 a:hover{
     color :bisque;
+}
+button{
+    cursor: pointer;
 }

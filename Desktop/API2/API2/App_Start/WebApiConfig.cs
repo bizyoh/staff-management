@@ -22,6 +22,7 @@ namespace API2
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
             config.Routes.MapHttpRoute(
              name: "swagger_root",
              routeTemplate: "",

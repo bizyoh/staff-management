@@ -29,14 +29,14 @@ namespace API2.Controllers
             var staffs = _staffService.GetAllStaff();
             return Ok(staffs);
         }
-        [HttpPost]   
-        
+        [HttpPost]
+
         public IHttpActionResult Staff(CreateStaffDto createStaffDto)
         {
             CreateStaffDtoValidation staffValidation = new CreateStaffDtoValidation();
             ValidationResult result = staffValidation.Validate(createStaffDto);
             int rs = _staffService.CreateStaff(createStaffDto);
-            if (rs>0)
+            if (rs > 0)
             {
                 return Ok(rs);
             }
@@ -47,12 +47,12 @@ namespace API2.Controllers
 
         public IHttpActionResult Staff(int Id)
         {
-            if(Id<= 0)
+            if (Id <= 0)
             {
                 return BadRequest();
             }
             var staff = _staffService.GetStaff(Id);
-            if(staff == null)
+            if (staff == null)
             {
                 return NotFound();
             }
@@ -67,7 +67,7 @@ namespace API2.Controllers
             {
                 return BadRequest();
             }
-           var rs = _staffService.DeleteStaff(id);
+            var rs = _staffService.DeleteStaff(id);
             if (!rs)
             {
                 return BadRequest();
@@ -76,7 +76,7 @@ namespace API2.Controllers
 
         }
         [HttpPut]
-
+      
         public IHttpActionResult Staff(int id,DetailStaffDto detailStaffDto)
         {
             if (id <= 0)

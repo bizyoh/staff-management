@@ -23,15 +23,15 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ParentId" Type="int" />
     <Property Name="Label" Type="nchar" MaxLength="100" />
-    <Property Name="Type" Type="int" />
+    <Property Name="Type" Type="nvarchar" MaxLength="200" />
     <Property Name="Name" Type="nvarchar" MaxLength="250" />
     <Property Name="StartDate" Type="date" />
     <Property Name="EndDate" Type="date" />
     <Property Name="Duration" Type="int" />
-    <Property Name="Progress" Type="nchar" MaxLength="10" />
+    <Property Name="Progress" Type="decimal" Precision="10" Scale="0" />
     <Property Name="IsUnscheduled" Type="bit" />
   </EntityType>
-  <Association Name="FK__StaffInTa__Staff__014935CB">
+  <Association Name="FK__StaffInTa__Staff__03317E3D">
     <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
     <End Role="StaffInTask" Type="Self.StaffInTask" Multiplicity="*" />
     <ReferentialConstraint>
@@ -43,7 +43,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__StaffInTa__Staff__07020F21">
+  <Association Name="FK__StaffInTa__Staff__0425A276">
     <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
     <End Role="StaffInTask" Type="Self.StaffInTask" Multiplicity="*" />
     <ReferentialConstraint>
@@ -55,7 +55,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__StaffInTa__TaskI__07F6335A">
+  <Association Name="FK__StaffInTa__TaskI__0519C6AF">
     <End Role="Task" Type="Self.Task" Multiplicity="1" />
     <End Role="StaffInTask" Type="Self.StaffInTask" Multiplicity="*" />
     <ReferentialConstraint>
@@ -71,15 +71,15 @@
     <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StaffInTask" EntityType="Self.StaffInTask" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__StaffInTa__Staff__014935CB" Association="Self.FK__StaffInTa__Staff__014935CB">
+    <AssociationSet Name="FK__StaffInTa__Staff__03317E3D" Association="Self.FK__StaffInTa__Staff__03317E3D">
       <End Role="Staff" EntitySet="Staff" />
       <End Role="StaffInTask" EntitySet="StaffInTask" />
     </AssociationSet>
-    <AssociationSet Name="FK__StaffInTa__Staff__07020F21" Association="Self.FK__StaffInTa__Staff__07020F21">
+    <AssociationSet Name="FK__StaffInTa__Staff__0425A276" Association="Self.FK__StaffInTa__Staff__0425A276">
       <End Role="Staff" EntitySet="Staff" />
       <End Role="StaffInTask" EntitySet="StaffInTask" />
     </AssociationSet>
-    <AssociationSet Name="FK__StaffInTa__TaskI__07F6335A" Association="Self.FK__StaffInTa__TaskI__07F6335A">
+    <AssociationSet Name="FK__StaffInTa__TaskI__0519C6AF" Association="Self.FK__StaffInTa__TaskI__0519C6AF">
       <End Role="Task" EntitySet="Task" />
       <End Role="StaffInTask" EntitySet="StaffInTask" />
     </AssociationSet>

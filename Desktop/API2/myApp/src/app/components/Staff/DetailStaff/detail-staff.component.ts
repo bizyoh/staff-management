@@ -23,24 +23,7 @@ import { Router } from '@angular/router';
      private router : Router,
      ){}
      ngOnInit(){
-        this.editStaffForm = this.formBuilder.group({
-          fullName: '',
-          shortName: '',
-          id:0
-        });
-      }
-      onSubmit(): void {
-        // Process checkout data here
-        let staffModel : Staff ={
-          FullName : this.editStaffForm.value.fullName,
-          ShortName : this.editStaffForm.value.shortName
-        };
-        if(this.editStaffForm.value.id>0){
-          this.staffService.edit(this.editStaffForm.value.id, staffModel).then(
-            res=>{
-              let id :number  = res as number;
-            } )
-        }
+       
       }
       async presentAlert() {
         const alert = await this.alertController.create({
@@ -80,19 +63,9 @@ import { Router } from '@angular/router';
           
         });
         modal.onDidDismiss().then(rs=>{
-           this.staff = rs.data as Staff;
-        })
-        modal.present();
-        const { data, role } = await modal.onWillDismiss();
-      }
-      async openModalDelete() {
-        const modal = await this.modalCtrl.create({
-          component: EditModalComponent,
-          componentProps:{staff:this.staff} 
-          
-        });
-        modal.onDidDismiss().then(rs=>{
-           this.staff = rs.data as Staff;
+          if(rs.role ==='confirm' && rs.data){
+            this.staff = rs.data as Staff;
+          }
         })
         modal.present();
         const { data, role } = await modal.onWillDismiss();

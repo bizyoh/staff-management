@@ -1,0 +1,49 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
+        </ion-buttons>
+        <ion-title> Edit {{task.Name}} Information</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="confirm()">Confirm</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+    <form [formGroup]="editTaskForm" (ngSubmit)="onSubmit()">
+        <ion-input label="Name" label-placement="floating" fill="solid" placeholder="Enter text"
+            formControlName="name"></ion-input>
+        <ion-input label="Label" label-placement="floating" fill="solid" placeholder="Enter text"
+            formControlName="label"></ion-input>
+        <ion-input label="Type" type="number" formControlName="type" label-placement="floating" fill="solid"
+            placeholder="Enter number">
+        </ion-input>
+        <ion-item (click)="showPickerStartDate = !showPickerStartDate">
+            <ion-label>Start date</ion-label>
+            <ion-text>{{startDateValue}}</ion-text>
+        <ion-datetime *ngIf="showPickerStartDate" [value]="startDateValue" size="cover"
+            (ionChange)="startDateChange($event)"></ion-datetime>
+        </ion-item>
+
+        <ion-item (click)="showPickerEndDate = !showPickerEndDate">
+            <ion-label>End date</ion-label>
+            <ion-text>{{endDateValue}}</ion-text>
+        <ion-datetime *ngIf="showPickerEndDate" [value]="endDateValue" size="cover"
+            (ionChange)="endDateChange($event)"></ion-datetime>
+        </ion-item>
+
+        <ion-input label="Duration" formControlName="duration" label-placement="floating" fill="solid"
+            placeholder="Enter number"></ion-input>
+        <ion-input label="Progress" label-placement="floating" fill="solid" placeholder="Enter text"
+            formControlName="progress"></ion-input>
+        <ion-item><ion-checkbox formControlName="isUnscheduled">is Unscheduled</ion-checkbox></ion-item>
+        <ng-select [(ngModel)]="parentID" [ngModelOptions]="{standalone: true}" [clearSearchOnAdd]="true"
+            placeholder="Parent Task" (change)="changeToSelectedParentTask($event)">
+            <ng-option *ngFor="let opt of tasks" [value]="opt.Id">{{opt.Name}}</ng-option>
+        </ng-select>
+        <div>
+            <ion-button expand="block" type="submit" color="secondary">Add</ion-button>
+        </div>
+    </form>
+
+</ion-content>

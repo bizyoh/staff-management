@@ -17,15 +17,26 @@ export class BASE_URLService{
     }
   
     GetAllTask(){
-        return this.url+"staff";
+        return this.url+"task";
     }
     CreateTask(){
-        return this.url+"staff";
+        return this.url+"task";
     }
     EditTask(id:number){
-        return this.url+"staff/"+id;
+        return this.url+"task/"+id;
     }
     DeleteTask(id:number){
-        return this.url+"staff/"+id;
+        return this.url+"task/"+id;
     }
+
+    GetAllChartTask(){
+        return this.url+"chart-task";
+    }
+    CreateChartTask(){
+        return this.url+"chart-task";
+    }
+    EditChartTask(id:number){
+        return this.url+"chart-task/"+id;
+    }
+   
 }

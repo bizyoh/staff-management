@@ -207,8 +207,11 @@
     <Compile Include="Mapper\BaseMapper.cs" />
     <Compile Include="Models\Dto\Staff\DetailStaffDto.cs" />
     <Compile Include="Models\Dto\Staff\CreateStaffDto.cs" />
+    <Compile Include="Models\Dto\Task\CreateTaskChartDto.cs" />
+    <Compile Include="Models\Dto\Task\DetailTaskChartDto.cs" />
     <Compile Include="Models\Dto\Task\DetailTaskDto.cs" />
     <Compile Include="Models\Dto\Task\CreateTaskDto.cs" />
+    <Compile Include="Models\Dto\Task\TaskChartDto.cs" />
     <Compile Include="Models\Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
